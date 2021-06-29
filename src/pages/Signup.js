@@ -28,7 +28,7 @@ const Signup = () => {
                 await createdUserResult.user.updateProfile({
                     displayName: username
                 })
-
+    
                 await firebase.firestore().collection('users').add({
                     userId: createdUserResult.user.uid,
                     username: username.toLowerCase(),
