@@ -58,10 +58,47 @@ const updateFollowedUserFollowers = async (profileDocId, loggedInUserDocId, isFo
     .collection('users')
     .doc(profileDocId)
     .update({
-        following: isFollowingProfile
+        followers: isFollowingProfile
             ? FieldValue.arrayRemove(loggedInUserDocId)
             : FieldValue.arrayUnion(loggedInUserDocId)
         })
 }
+//Get Photos/Posts for all userId-s in following
+const getPhotos = async (userId, following) => {
+    const result = await firebase
+        .firestore()
+        .collection('photos')
+        .where('userId', 'in', following)
+        .get()
 
-export {doesUsernameExist, getUserByUserId, getSuggestedProfiles, updateLoggedInUserFollowing, updateFollowedUserFollowers};
+    const userFollowingPhotos = result.docs.map((photo) => ({
+        ...photo.data(),
+        docId: photo.id
+    }));
+
+    const photosWithUserDetails = await Promise.all(
+        userFollowingPhotos.map( async (photo) => {
+            //Check to see if photos are liked by currnet user and return true or false
+            //for each photo of the people we are following
+            let userLikedPhoto = false;
+            if(photo.likes.includes(userId)) {
+                userLikedPhoto = true;
+            }
+            //Get the user that posted Photo so we can display it in post header
+            const user = await getUserByUserId(photo.userId);
+            const { username } = user[0];
+            return { username, ...photo, userLikedPhoto}
+        })
+    )
+
+    return photosWithUserDetails;
+}
+
+export {
+    doesUsernameExist, 
+    getUserByUserId, 
+    getSuggestedProfiles, 
+    updateLoggedInUserFollowing, 
+    updateFollowedUserFollowers,
+    getPhotos
+};
