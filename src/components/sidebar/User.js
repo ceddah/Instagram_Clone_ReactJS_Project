@@ -1,4 +1,3 @@
-import React, { memo } from 'react'
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
@@ -18,11 +17,11 @@ const User = ({username, fullName}) =>
         </Link>
     )
 
-export default memo(User);
+export default User;
 
 User.propTypes = {
-    username: PropTypes.string.isRequired,
-    fullName: PropTypes.string.isRequired
+    username: PropTypes.string,
+    fullName: PropTypes.string
 };
 
 User.whyDidYouRender = true;
