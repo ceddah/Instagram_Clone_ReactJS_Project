@@ -123,6 +123,23 @@ const getUserPhotosByUsername = async (username) => {
     }))
 }
 
+//Doing a check to see if we are following the currently opened profile
+const isUserFollowingProfile = async (loggedInUserUsername, profileUserId) => {
+    const result = await firebase
+        .firestore()
+        .collection('users')
+        .where('username', '==', loggedInUserUsername)
+        .where('following', 'array-contains', profileUserId)
+        .get();
+    
+        const [response = {}] = result.docs.map((item) => ({
+            ...item.data(),
+            docId: item.id
+        }));
+
+        return response.userId;
+}
+
 export {
     doesUsernameExist, 
     getUserByUserId, 
@@ -131,5 +148,6 @@ export {
     updateFollowedUserFollowers,
     getPhotos,
     getUserByUsername,
-    getUserPhotosByUsername
+    getUserPhotosByUsername,
+    isUserFollowingProfile
 };

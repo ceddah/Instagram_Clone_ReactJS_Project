@@ -5,7 +5,7 @@ import Skeleton from 'react-loading-skeleton';
 const Photos = ({ photos }) => {
     return (
         <div>
-           sda 
+           Photos Component
         </div>
     )
 }

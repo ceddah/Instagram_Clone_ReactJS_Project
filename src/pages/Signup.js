@@ -35,6 +35,7 @@ const Signup = () => {
                     fullName: fullName,
                     emailAddress: emailAddress.toLowerCase(),
                     following: [],
+                    followers: [],
                     dateCreated: Date.now()
                 });
                 history.push(ROUTES.DASHBOARD);
