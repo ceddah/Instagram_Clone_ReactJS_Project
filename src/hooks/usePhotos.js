@@ -16,6 +16,7 @@ const usePhotos = () => {
             if(following.length > 0) {
                 followedUserPhotos = await getPhotos(userId, following);
             }
+            //re-arrange posts by date created
             followedUserPhotos.sort((a,b) => b.dateCreated - a.dateCreated);
             setPhotos(followedUserPhotos);
         }
