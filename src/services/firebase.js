@@ -10,6 +10,20 @@ const doesUsernameExist = async (username) => {
     return result.docs.map((user) => user.data().length > 0);
 }
 
+const getUserByUsername = async (username) => {
+    const result = await firebase
+        .firestore()
+        .collection('users')
+        .where('username', '==', username)
+        .get()
+
+    const user = result.docs.map((item) => ({
+        ...item.data(),
+        docId: item.id
+    }))
+    return user;
+}
+
 const getUserByUserId = async (userId) => {
     const result = await firebase
         .firestore()
@@ -100,5 +114,6 @@ export {
     getSuggestedProfiles, 
     updateLoggedInUserFollowing, 
     updateFollowedUserFollowers,
-    getPhotos
+    getPhotos,
+    getUserByUsername
 };
