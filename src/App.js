@@ -4,6 +4,9 @@ import * as ROUTES from './constants/routes';
 import useAuthListener from './hooks/useAuthListener';
 import UserContext from './context/user';
 
+import ProtectedRoute from './helpers/protected.route';
+import isUserLoggedIn from './helpers/is-user-logged-in';
+
 const Login = lazy(() => import ('./pages/Login'));
 const Signup = lazy(() => import ('./pages/Signup'));
 const Dashboard = lazy(() => import ('./pages/Dashboard'));
@@ -18,7 +21,9 @@ const App = () => {
           <Switch>
             <Route path={ROUTES.LOGIN} component={Login} />
             <Route path={ROUTES.SIGN_UP} component={Signup} />
-            <Route path={ROUTES.DASHBOARD} component={Dashboard} />
+            <ProtectedRoute user={user} path={ROUTES.DASHBOARD} exact >
+              <Dashboard />
+            </ProtectedRoute>
             <Route component={NotFound} />
           </Switch>
         </Suspense>
