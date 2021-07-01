@@ -1,1 +1,1 @@
-#### Check out[Live Demo:](https://instagram-clone-ten-beige.vercel.app/)
+#### Preview: [Live Demo:](https://instagram-clone-ten-beige.vercel.app/)
