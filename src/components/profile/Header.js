@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Skeleton from 'react-loading-skeleton';
 import useUser from '../../hooks/useUser';
 import { isUserFollowingProfile, toggleFollow } from '../../services/firebase';
+import { DEFAULT_IMAGE_PATH } from '../../constants/paths';
 
 const Header = ({
         photosCount,
@@ -12,7 +13,7 @@ const Header = ({
     }) => {
     const [isFollowingProfile, setisFollowingProfile] = useState(false);
     const { user } = useUser();
-    //Checking if we are not visiting our own profile
+    //Checking if user is logged(exists) and if we are not visiting our own profile
     const activeBtnFollow = user.username && user.username !== profileUsername;
 
     const handleToggleFollow = async ()  => {
@@ -40,7 +41,10 @@ const Header = ({
                {profileUsername ? <img 
                 className="rounded-full h-40 w-40" 
                 alt={`${fullName} Profile`} 
-                src={`/images/avatars/${profileUsername}.jpg`}    
+                src={`/images/avatars/${profileUsername}.jpg`} 
+                onError={(e) => {
+                    e.target.src = DEFAULT_IMAGE_PATH;
+                }}   
                 /> : <Skeleton circle height={150} width={150} count={1} />}
            </div>
            <div className="flex items-center justify-center flex-col col-span-2">

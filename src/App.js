@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import * as ROUTES from './constants/routes';
+import ReactLoader from './components/Loader';
 import useAuthListener from './hooks/useAuthListener';
 import UserContext from './context/user';
 
@@ -12,14 +13,13 @@ const Signup = lazy(() => import ('./pages/Signup'));
 const Dashboard = lazy(() => import ('./pages/Dashboard'));
 const NotFound = lazy(() => import ('./pages/NotFound'));
 const Profile = lazy(() => import ('./pages/Profile'));
-//Change Suspence Fallback to a spinner and center it
-//Set up a placeholder image for new users
+
 const App = () => {
   const { user } = useAuthListener();
   return (
     <UserContext.Provider value={{ user }}>
       <Router>
-        <Suspense fallback={<p>Loading...</p>}>
+        <Suspense fallback={<ReactLoader />}>
           <Switch>
             <isUserLoggedIn user={user} loggedInPath={ROUTES.DASHBOARD} path={ROUTES.LOGIN}>
               <Login />

@@ -11,7 +11,7 @@ const AddComment = ({docId, comments, setComments, commentInput}) => {
     const handleSubmitComment = (e) => {
         e.preventDefault();
         //This will only update our local comments array
-        setComments([{ displayName, comment }, ...comments]);
+        setComments([...comments, { displayName, comment }]);
         setComment('');
         //This will update firebase comment array that is in photos -> docId -> comments
         return firebase

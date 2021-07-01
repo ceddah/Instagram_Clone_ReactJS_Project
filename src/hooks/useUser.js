@@ -7,6 +7,7 @@ const useUser = () => {
     const { user } = useContext(UserContext);
 
     useEffect(() => {
+        //Gets us a Data Object for currently logged in user
         const getUserObjByUserId = async () => {
             const [response] = await getUserByUserId(user.uid);
             setActiveUser(response);
@@ -17,7 +18,6 @@ const useUser = () => {
         }
         
     }, [user])
-
 
     return { user: activeUser };
 }

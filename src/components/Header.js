@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
+import { DEFAULT_IMAGE_PATH } from '../constants/paths';
 import FirebaseContext from '../context/firebase'
 import UserContext from '../context/user'
 import * as ROUTES from '../constants/routes';
@@ -68,7 +69,11 @@ const Header = () => {
                                                 <img 
                                                     className="rounded-full h-8 w-8 flex" 
                                                     alt={`${user.displayName} profile`}
-                                                    src={`/images/avatars/${user.displayName}.jpg`} />
+                                                    src={`/images/avatars/${user.displayName}.jpg`} 
+                                                    onError={(e) => {
+                                                        e.target.src = DEFAULT_IMAGE_PATH;
+                                                    }}
+                                                    />
                                             </Link>
                                         </div>
                                 </>
