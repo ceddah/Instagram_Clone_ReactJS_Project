@@ -78,6 +78,7 @@ const updateFollowedUserFollowers = async (profileDocId, loggedInUserDocId, isFo
         })
 }
 //Get Photos/Posts for all userId-s in following
+//following is list of IDS in currently logged in users following
 const getPhotos = async (userId, following) => {
     const result = await firebase
         .firestore()
@@ -140,6 +141,11 @@ const isUserFollowingProfile = async (loggedInUserUsername, profileUserId) => {
         return response.userId;
 }
 
+const toggleFollow = async (isFollowingProfile, activeUserDocId, profileDocId, profileUserId, followingUserId) => {
+    await updateLoggedInUserFollowing(activeUserDocId, profileUserId, isFollowingProfile);
+    await updateFollowedUserFollowers(profileDocId, followingUserId, isFollowingProfile);
+}
+
 export {
     doesUsernameExist, 
     getUserByUserId, 
@@ -149,5 +155,6 @@ export {
     getPhotos,
     getUserByUsername,
     getUserPhotosByUsername,
-    isUserFollowingProfile
+    isUserFollowingProfile,
+    toggleFollow
 };

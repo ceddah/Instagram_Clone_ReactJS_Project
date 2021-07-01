@@ -13,6 +13,7 @@ const Dashboard = lazy(() => import ('./pages/Dashboard'));
 const NotFound = lazy(() => import ('./pages/NotFound'));
 const Profile = lazy(() => import ('./pages/Profile'));
 //Change Suspence Fallback to a spinner and center it
+//Set up a placeholder image for new users
 const App = () => {
   const { user } = useAuthListener();
   return (
