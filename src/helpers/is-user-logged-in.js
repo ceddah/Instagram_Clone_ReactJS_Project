@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
-import * as ROUTES from '../constants/routes';
 
 const isUserLoggedIn = ({ user, loggedInPath, children, ...rest }) => {
     //IF user is logged in do not allow him to go to Sign up and Login Page.
