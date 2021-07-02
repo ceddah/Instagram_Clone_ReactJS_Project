@@ -7,15 +7,18 @@ import AddComment from './AddComment';
 const Comments = ({docId, comments: allComments, posted, commentInput}) => {
 
     const [comments, setComments] = useState(allComments);
+    const [showAllComments, setShowAllComments] = useState(false);
+    // const showComments = showAllComments ? comments.length : 3;
+    const correntSlice = showAllComments ? (comments.length - comments.length) : comments.length - 3;
     return (
         <>
             <div className="p-4 pt-1 pb-4">
-                {comments.length >= 3 && (
-                    <p className="text-sm text-gray-base mb-1 cursor-pointer">
+                {comments.length > 3 && !showAllComments && (
+                    <p onClick={() => setShowAllComments(true)} className="text-sm text-gray-base mb-1 cursor-pointer">
                         View All {comments.length} Comments
                     </p>
                 )}
-                {comments.slice(0, 3).map((item) => (
+                {comments.slice(correntSlice).map((item) => (
                     <p className="mb-1" key={`${item.comment}-${item.displayName}`}>
                         <Link to={`/p/${item.displayName}`}>
                             <span className="mr-1 font-bold">{item.displayName}</span>

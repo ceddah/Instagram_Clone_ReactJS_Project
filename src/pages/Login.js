@@ -59,7 +59,7 @@ const Login = () => {
                             disabled={isInvalid} 
                             type="submit" 
                             className={`bg-blue-medium text-white w-full rounded h-8 font-bold ${isInvalid && 'opacity-50'}`}
-                        >Log In</button>
+                        >Login</button>
                     </form>
                 </div>
                 <div className="flex justify-center items-center flex-col w-full bg-white py-4 rounded border border-gray-primary">

@@ -48,6 +48,7 @@ const Signup = () => {
             }
         } else {
             setError('That username is already taken.')
+            setUsername('');
         }
         
     }
