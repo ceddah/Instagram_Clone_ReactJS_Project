@@ -8,8 +8,7 @@ const Comments = ({docId, comments: allComments, posted, commentInput}) => {
 
     const [comments, setComments] = useState(allComments);
     const [showAllComments, setShowAllComments] = useState(false);
-    // const showComments = showAllComments ? comments.length : 3;
-    const correntSlice = showAllComments ? (comments.length - comments.length) : comments.length - 3;
+    const correctSlice = showAllComments ? (comments.length - comments.length) : comments.length - 3;
     return (
         <>
             <div className="p-4 pt-1 pb-4">
@@ -18,7 +17,7 @@ const Comments = ({docId, comments: allComments, posted, commentInput}) => {
                         View All {comments.length} Comments
                     </p>
                 )}
-                {comments.slice(correntSlice).map((item) => (
+                {comments.slice(correctSlice).map((item) => (
                     <p className="mb-1" key={`${item.comment}-${item.displayName}`}>
                         <Link to={`/p/${item.displayName}`}>
                             <span className="mr-1 font-bold">{item.displayName}</span>
